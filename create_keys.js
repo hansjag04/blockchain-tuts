@@ -16,13 +16,12 @@ var fs = require('fs');
 // const payments = require('./payments')
 
 // Generate number of private keys
-var maxKeys = 10;
+var maxKeys = 1;
 
 // Name of the output file
-var outputFile = "private_keys_testnet.txt";
+var outputFile = "private_keys_testnet.key";
 
 var stream = fs.createWriteStream(outputFile);
-
 stream.once('open', function(fd) {
 	for (var i=0; i<maxKeys; i++) {
 		var keyPair = bitcoin.ECPair.makeRandom({network: bitcoin.networks.testnet});
@@ -31,6 +30,10 @@ stream.once('open', function(fd) {
 		var line = [i, privateKeyWIFCompressed, publicKeyCompressed];
 		stream.write(line.join(", "));
 		stream.write("\n");
+		console.log("Your Keys are: ");
+		console.log("Private key: ", privateKeyWIFCompressed);
+		console.log("Public key: ", publicKeyCompressed);
+		console.log("---");
 	}
 	stream.end();
 });

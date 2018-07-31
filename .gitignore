@@ -1,3 +1,8 @@
+# Blockchain Keys
+*.key
+
+*.DS_STORE
+
 # Logs
 logs
 *.log
